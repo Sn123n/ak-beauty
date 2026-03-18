@@ -1,0 +1,32 @@
+{
+  "name": "ak_beauty_otp_verification",
+  "category": "UTILITY",
+  "language": "en_US",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "IMAGE",
+      "example": {
+        "header_handle": [
+          "https://your-domain.com/client_assets/images/logo-3.png"
+        ]
+      }
+    },
+    {
+      "type": "BODY",
+      "text": "Hello {{1}},\n\nYour verification code for AK BEAUTY STORE is:\n\n*{{2}}*\n\nThis code will expire in 5 minutes.\nPlease do not share this code with anyone.\n\n🔒 *Security Notice*\nFor your security, never share this code. AK BEAUTY STORE will never ask for your verification code via phone or email.\n\n⏱️ Valid for 5 minutes only",
+      "example": {
+        "body_text": [
+          [
+            "John Doe",
+            "47261"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "FOOTER",
+      "text": "AK BEAUTY STORE"
+    }
+  ]
+}

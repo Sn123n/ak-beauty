@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Template Visual Preview - Twilio Submission</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2a2a3a;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .preview-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        @media (max-width: 768px) {
+            .preview-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        .phone-mockup {
+            background: #0b141a;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .phone-screen {
+            background: #0b141a;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        .whatsapp-header {
+            background: #202c33;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+        .header-info h3 {
+            color: #e9edef;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .verified-badge {
+            width: 18px;
+            height: 18px;
+            background: #0086cc;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .header-info p {
+            color: #8696a0;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+        .chat-area {
+            padding: 20px 15px 80px;
+            background: #0b141a;
+        }
+        .message-bubble {
+            background: #202c33;
+            color: #e9edef;
+            padding: 12px 15px;
+            border-radius: 8px;
+            max-width: 75%;
+            margin: 8px 0;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        .message-bubble .logo-header {
+            text-align: center;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #2a3942;
+        }
+        .message-bubble .logo-header img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 8px;
+            object-fit: contain;
+        }
+        .message-bubble .company-name {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+        .message-bubble .otp-code {
+            background: #0b141a;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 12px 0;
+            border: 1px solid #2a3942;
+        }
+        .message-bubble .otp-number {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            color: #25D366;
+            margin: 8px 0;
+        }
+        .message-bubble .security-box {
+            background: #1e2a32;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 12px;
+            border-left: 3px solid #f39c12;
+            font-size: 12px;
+        }
+        .message-bubble .time {
+            text-align: right;
+            color: #8696a0;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        .submission-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        .submission-info h2 {
+            color: #2a2a3a;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .info-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-item label {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .info-item .value {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            font-size: 13px;
+            word-break: break-all;
+        }
+        .btn-section {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #25D366;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #20ba5a;
+        }
+        .btn-secondary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5568d3;
+        }
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #856404;
+        }
+        .note-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 WhatsApp OTP Template - Twilio Submission Preview</h1>
+        <p class="subtitle">Design preview with company logo for Twilio approval</p>
+
+        <div class="preview-section">
+            <!-- WhatsApp Preview -->
+            <div>
+                <h2 style="margin-bottom: 15px; color: #2a2a3a;">WhatsApp Message Preview</h2>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="whatsapp-header">
+                            <div class="profile-pic">
+                                <img src="/client_assets/images/logo-3.png" alt="AK BEAUTY STORE" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+                            </div>
+                            <div class="header-info">
+                                <h3>
+                                    AK BEAUTY STORE
+                                    <span class="verified-badge">✓</span>
+                                </h3>
+                                <p>Business account</p>
+                            </div>
+                        </div>
+                        <div class="chat-area">
+                            <div class="message-bubble">
+                                <div class="logo-header">
+                                    <img src="/client_assets/images/logo-3.png" alt="AK BEAUTY STORE" onerror="this.style.display='none';">
+                                    <div class="company-name">AK BEAUTY STORE</div>
+                                    <div style="font-size: 11px; color: #8696a0;">Business account</div>
+                                </div>
+                                
+                                Hello John Doe,<br><br>
+                                Your verification code for <strong>AK BEAUTY STORE</strong> is:<br><br>
+                                
+                                <div class="otp-code">
+                                    <div class="otp-number">47261</div>
+                                    <div style="font-size: 11px; color: #8696a0;">Verification Code</div>
+                                </div>
+                                
+                                This code will expire in 5 minutes.<br>
+                                Please do not share this code with anyone.<br><br>
+                                
+                                <div class="security-box">
+                                    <strong style="color: #f39c12;">🔒 Security Notice</strong><br>
+                                    <span style="color: #8696a0;">For your security, never share this code. AK BEAUTY STORE will never ask for your verification code via phone or email.</span>
+                                </div>
+                                
+                                <div style="margin-top: 10px; font-size: 12px; color: #8696a0;">
+                                    ⏱️ Valid for 5 minutes only
+                                </div>
+                                
+                                <div class="time">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submission Info -->
+            <div class="submission-info">
+                <h2>📋 Template Details</h2>
+                
+                <div class="info-item">
+                    <label>Template Name:</label>
+                    <div class="value">ak_beauty_otp_verification</div>
+                </div>
+
+                <div class="info-item">
+                    <label>Category:</label>
+                    <div class="value">UTILITY</div>
+                </div>
+
+                <div class="info-item">
+                    <label>Language:</label>
+                    <div class="value">en_US (English - US)</div>
+                </div>
+
+                <div class="info-item">
+                    <label>Variables:</label>
+                    <div class="value">
+                        {{1}} - Customer Name (Text)<br>
+                        {{2}} - OTP Code (Text, 5 digits)
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <label>Logo URL Required:</label>
+                    <div class="value">
+                        Must be publicly accessible HTTPS URL<br>
+                        Example: https://akbeauty.com/client_assets/images/logo-3.png
+                    </div>
+                </div>
+
+                <div class="btn-section">
+                    <a href="TWILIO_SUBMISSION_GUIDE.md" class="btn btn-primary" target="_blank">
+                        📖 View Full Guide
+                    </a>
+                    <a href="twilio-template-submission.json" class="btn btn-secondary" download>
+                        📥 Download JSON
+                    </a>
+                    <button class="btn btn-primary" onclick="window.print()">
+                        🖨️ Print for Submission
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-box">
+            <strong>⚠️ Important Before Submission:</strong>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Ensure your logo is accessible via HTTPS URL</li>
+                <li>Test the logo URL in a browser to verify it loads</li>
+                <li>Logo should be square (recommended: 640x640px)</li>
+                <li>Use Twilio Console for easier submission: https://console.twilio.com/</li>
+                <li>Template approval usually takes 24-48 hours</li>
+            </ul>
+        </div>
+
+        <div class="note-box" style="background: #e7f3ff; border-color: #2196F3; color: #0c5460;">
+            <strong>💡 Alternative Version:</strong>
+            If template with image header gets rejected, use the simpler version without logo:
+            <a href="twilio-template-submission-simple.json" style="color: #2196F3;">Download Simple Version (No Logo)</a>
+        </div>
+    </div>
+</body>
+</html>

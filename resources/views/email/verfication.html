@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    body { margin:0; padding:0; background-color:#f4f6f8; }
+    table { border-collapse:collapse; }
+    img { border:0; display:block; }
+    a { color:#49b8e4; text-decoration:none; }
+    @media only screen and (max-width:600px){
+      .container { width:100% !important; }
+      .stack { display:block !important; width:100% !important; }
+      .center { text-align:center !important; }
+      .hide-mobile { display:none !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:24px; background-color:#f4f6f8; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px; background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding:20px 24px; background:#2a2a3a; color:#ffffff;">
+              <table role="presentation" width="100%">
+                <tr>
+                  <td style="vertical-align:middle; text-align:center;">
+                    <img src="../assets/images/logo-3.png" alt="Ak BEAUTY SHOP" width="140" style="display:block;margin:auto;">
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Main content -->
+          <tr>
+            <td style="padding:32px 24px; text-align:center;">
+              <h1 style="font-size:22px; color:#111; margin:0 0 10px 0;">Verify Your Email Address</h1>
+              <p style="font-size:15px; color:#555; margin:0 0 24px 0; line-height:1.6;">
+                Dear {{customer_name}},<br>
+                Please confirm your email address to complete your registration with <strong>Ak BEAUTY SHOP</strong>.
+              </p>
+
+              <!-- Verification Code Box -->
+              <div style="display:inline-block; padding:16px 32px; border:2px dashed #49b8e4; border-radius:8px; background-color:#f0faff; font-size:24px; letter-spacing:4px; font-weight:bold; color:#2a2a3a;">
+                576842
+              </div>
+
+              <p style="font-size:14px; color:#777; margin:24px 0 32px 0;">
+                This code will expire in <strong>10 minutes</strong>. If you didn’t request this, you can safely ignore this email.
+              </p>
+
+              <!-- Button -->
+              <a href="{{verification_url}}" style="display:inline-block; padding:12px 28px; border-radius:13px; background-color:#49b8e4; color:#ffffff; font-weight:600;">
+                Verify My Email
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 24px; background-color:#2a2a3a; font-size:13px; color:#fff; text-align:center;">
+              <div style="margin-bottom:8px; font-size:12px; color:#fff;">© 2025, Ak BEAUTY SHOP</div>
+              <div>
+                <a href="{{contact_us_url}}" style="margin:0 8px; color:#49b8e4;">Contact Us</a> |
+                <a href="{{terms_url}}" style="margin:0 8px; color:#49b8e4;">Terms & Conditions</a> |
+                <a href="{{privacy_url}}" style="margin:0 8px; color:#49b8e4;">Privacy Policy</a>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

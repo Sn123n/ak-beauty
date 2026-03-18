@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp OTP Test - Twilio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2a2a3a;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #25D366;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #20ba5a;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #0c5460;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #856404;
+        }
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #155724;
+            display: none;
+        }
+        .error-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #721c24;
+            display: none;
+        }
+        .message-preview {
+            background: #e5f5e5;
+            border-left: 4px solid #25D366;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .phone-format {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .otp-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #25D366;
+            text-align: center;
+            padding: 10px;
+            background: #f0f9f0;
+            border-radius: 5px;
+            margin: 10px 0;
+            letter-spacing: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 WhatsApp OTP Test</h1>
+        <p class="subtitle">Test sending OTP via Twilio WhatsApp API</p>
+
+        <div class="info-box">
+            <strong>ℹ️ Instructions:</strong><br>
+            1. Enter your Twilio credentials<br>
+            2. Enter recipient phone number (with country code, e.g., +919876543210)<br>
+            3. Click "Generate OTP" to create a random 5-digit code<br>
+            4. Click "Send WhatsApp OTP" to send via Twilio API
+        </div>
+
+        <form id="otpForm">
+            <div class="form-group">
+                <label for="accountSid">Twilio Account SID *</label>
+                <input type="text" id="accountSid" placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" required>
+            </div>
+
+            <div class="form-group">
+                <label for="authToken">Twilio Auth Token *</label>
+                <input type="password" id="authToken" placeholder="Your auth token" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fromNumber">Twilio WhatsApp From Number *</label>
+                <input type="text" id="fromNumber" placeholder="whatsapp:+14155238886" required>
+                <div class="phone-format">Format: whatsapp:+14155238886 (Use Twilio Sandbox number for testing)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="toNumber">Recipient Phone Number *</label>
+                <input type="text" id="toNumber" placeholder="whatsapp:+919876543210" required>
+                <div class="phone-format">Format: whatsapp:+[country code][phone number]</div>
+            </div>
+
+            <div class="form-group">
+                <label for="recipientName">Recipient Name *</label>
+                <input type="text" id="recipientName" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn" id="generateBtn" style="background: #667eea; margin-bottom: 10px;">
+                    Generate OTP
+                </button>
+                <div id="otpDisplay" style="display: none;">
+                    <label>Generated OTP:</label>
+                    <div class="otp-display" id="otpValue"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message Preview (Auto-generated)</label>
+                <textarea id="message" readonly></textarea>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Send WhatsApp OTP</button>
+        </form>
+
+        <div class="warning-box">
+            <strong>⚠️ Security Warning:</strong><br>
+            This is a test page. In production, never expose your Twilio Auth Token in client-side code. 
+            Always make API calls from your backend server (Laravel).
+        </div>
+
+        <div class="success-box" id="successBox"></div>
+        <div class="error-box" id="errorBox"></div>
+    </div>
+
+    <script>
+        let generatedOtp = '';
+
+        // Generate OTP
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            generatedOtp = Math.floor(10000 + Math.random() * 90000).toString();
+            document.getElementById('otpValue').textContent = generatedOtp;
+            document.getElementById('otpDisplay').style.display = 'block';
+            updateMessagePreview();
+        });
+
+        // Update message preview when name or OTP changes
+        function updateMessagePreview() {
+            const name = document.getElementById('recipientName').value || '{{NAME}}';
+            const otp = generatedOtp || '{{OTP}}';
+            
+            const message = `Hello ${name},
+
+Your AK BEAUTY STORE verification code is: ${otp}
+
+This code will expire in 5 minutes.
+
+If you didn't request this code, please ignore this message.
+
+Thank you,
+AK BEAUTY STORE Team`;
+
+            document.getElementById('message').value = message;
+        }
+
+        document.getElementById('recipientName').addEventListener('input', updateMessagePreview);
+
+        // Handle form submission
+        document.getElementById('otpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!generatedOtp) {
+                alert('Please generate an OTP first!');
+                return;
+            }
+
+            const accountSid = document.getElementById('accountSid').value;
+            const authToken = document.getElementById('authToken').value;
+            const fromNumber = document.getElementById('fromNumber').value;
+            const toNumber = document.getElementById('toNumber').value;
+            const message = document.getElementById('message').value;
+
+            // Hide previous messages
+            document.getElementById('successBox').style.display = 'none';
+            document.getElementById('errorBox').style.display = 'none';
+
+            // Disable submit button
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                // Using Twilio REST API directly from browser (for testing only!)
+                // In production, call your Laravel backend API
+                const response = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Basic ' + btoa(accountSid + ':' + authToken)
+                    },
+                    body: new URLSearchParams({
+                        'From': fromNumber,
+                        'To': toNumber,
+                        'Body': message
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('successBox').style.display = 'block';
+                    document.getElementById('successBox').innerHTML = `
+                        <strong>✅ Success!</strong><br>
+                        WhatsApp OTP sent successfully!<br>
+                        Message SID: ${data.sid}<br>
+                        Status: ${data.status}
+                    `;
+                } else {
+                    throw new Error(data.message || 'Failed to send message');
+                }
+            } catch (error) {
+                document.getElementById('errorBox').style.display = 'block';
+                document.getElementById('errorBox').innerHTML = `
+                    <strong>❌ Error:</strong><br>
+                    ${error.message}<br><br>
+                    <strong>Note:</strong> Make sure:<br>
+                    • Your Twilio credentials are correct<br>
+                    • The recipient number is verified (if using Sandbox)<br>
+                    • Your Twilio account has WhatsApp enabled<br>
+                    • CORS is properly configured (or use backend API)
+                `;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send WhatsApp OTP';
+            }
+        });
+
+        // Initial message preview
+        updateMessagePreview();
+    </script>
+</body>
+</html>

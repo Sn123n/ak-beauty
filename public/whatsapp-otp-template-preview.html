@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp OTP Template Preview - AK BEAUTY STORE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0b141a;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone-mockup {
+            width: 375px;
+            background: #0b141a;
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+        .phone-screen {
+            background: #0b141a;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+        .whatsapp-header {
+            background: #202c33;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .profile-pic {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+        .header-info {
+            flex: 1;
+        }
+        .business-name {
+            color: #e9edef;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .verified-badge {
+            width: 16px;
+            height: 16px;
+            background: #0086cc;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+        .business-status {
+            color: #8696a0;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+        .chat-area {
+            padding: 20px 15px;
+            background: #0b141a;
+            min-height: 500px;
+        }
+        .date-divider {
+            text-align: center;
+            color: #8696a0;
+            font-size: 12px;
+            margin: 20px 0;
+        }
+        .meta-notice {
+            background: #182229;
+            color: #25D366;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 12px;
+            text-align: center;
+        }
+        .message-bubble {
+            background: #202c33;
+            color: #e9edef;
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 85%;
+            margin: 10px 0;
+            position: relative;
+            word-wrap: break-word;
+        }
+        .message-bubble .logo-section {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a3942;
+        }
+        .message-bubble .logo-section img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+        .message-bubble .company-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #e9edef;
+            margin-bottom: 5px;
+        }
+        .message-bubble .business-badge {
+            font-size: 11px;
+            color: #8696a0;
+        }
+        .message-text {
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .otp-code {
+            background: #0b141a;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+            border: 1px solid #2a3942;
+        }
+        .otp-number {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: #25D366;
+            margin: 10px 0;
+        }
+        .otp-label {
+            font-size: 13px;
+            color: #8696a0;
+            margin-top: 5px;
+        }
+        .security-note {
+            background: #1e2a32;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 3px solid #f39c12;
+        }
+        .security-note strong {
+            color: #f39c12;
+            font-size: 13px;
+        }
+        .security-note p {
+            font-size: 12px;
+            color: #8696a0;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+        .expiry-info {
+            color: #8696a0;
+            font-size: 12px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .message-time {
+            text-align: right;
+            color: #8696a0;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        .print-section {
+            background: white;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+        .print-section h2 {
+            color: #202c33;
+            margin-bottom: 20px;
+        }
+        .template-code {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .btn-print {
+            background: #25D366;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-mockup">
+        <div class="phone-screen">
+            <!-- WhatsApp Header -->
+            <div class="whatsapp-header">
+                <div class="profile-pic">
+                    <img src="/client_assets/images/logo-3.png" alt="AK BEAUTY STORE Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+                </div>
+                <div class="header-info">
+                    <div class="business-name">
+                        AK BEAUTY STORE
+                        <span class="verified-badge">✓</span>
+                    </div>
+                    <div class="business-status">Business account</div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-area">
+                <div class="date-divider">Today</div>
+                
+                <div class="meta-notice">
+                    This business uses a secure service from Meta to manage this chat. Tap to learn more.
+                </div>
+
+                <!-- OTP Message -->
+                <div class="message-bubble">
+                    <div class="logo-section">
+                        <img src="/client_assets/images/logo-3.png" alt="AK BEAUTY STORE" onerror="this.style.display='none';">
+                        <div class="company-name">AK BEAUTY STORE</div>
+                        <div class="business-badge">Business account</div>
+                    </div>
+
+                    <div class="message-text">
+                        Hello {{1}},<br><br>
+                        Your verification code for AK BEAUTY STORE is:
+                    </div>
+
+                    <div class="otp-code">
+                        <div class="otp-number">{{2}}</div>
+                        <div class="otp-label">Verification Code</div>
+                    </div>
+
+                    <div class="message-text">
+                        This code will expire in 5 minutes.<br>
+                        Please do not share this code with anyone.
+                    </div>
+
+                    <div class="security-note">
+                        <strong>🔒 Security Notice</strong>
+                        <p>For your security, never share this code. AK BEAUTY STORE will never ask for your verification code via phone or email.</p>
+                    </div>
+
+                    <div class="expiry-info">
+                        ⏱️ Valid for 5 minutes only
+                    </div>
+
+                    <div class="message-time">Just now</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Print Section for Twilio Submission -->
+    <div class="print-section" id="printSection" style="display: none;">
+        <h2>📋 Template Details for Twilio Submission</h2>
+        
+        <h3>Template Name:</h3>
+        <div class="template-code">ak_beauty_otp_verification</div>
+
+        <h3>Category:</h3>
+        <div class="template-code">UTILITY</div>
+
+        <h3>Language:</h3>
+        <div class="template-code">en_US</div>
+
+        <h3>Template Content:</h3>
+        <div class="template-code">
+Hello {{1}},
+
+Your verification code for AK BEAUTY STORE is:
+
+*{{2}}*
+
+This code will expire in 5 minutes.
+Please do not share this code with anyone.
+
+🔒 *Security Notice*
+For your security, never share this code. AK BEAUTY STORE will never ask for your verification code via phone or email.
+
+⏱️ Valid for 5 minutes only
+        </div>
+
+        <h3>Variables:</h3>
+        <div class="template-code">
+{{1}} - Customer Name
+{{2}} - OTP Code (5 digits)
+        </div>
+
+        <button class="btn-print" onclick="window.print()">Print for Twilio Submission</button>
+    </div>
+
+    <script>
+        // Show print section on click
+        document.querySelector('.phone-mockup').addEventListener('dblclick', function() {
+            document.getElementById('printSection').style.display = 'block';
+            document.getElementById('printSection').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
