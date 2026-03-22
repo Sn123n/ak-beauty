@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home1/akbeac49/dev.akbeautystore.com
+    - /bin/cp -R . $DEPLOYPATH
+    - /bin/bash -c "cd $DEPLOYPATH && php artisan migrate --force"
+    - /bin/bash -c "cd $DEPLOYPATH && php artisan config:cache"
+    - /bin/bash -c "cd $DEPLOYPATH && php artisan route:cache"
